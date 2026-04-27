@@ -79,6 +79,33 @@ function setupCasualDevToolsBlock() {
   });
 }
 
+function setupAutoLogoutOnLeave() {
+  let logoutSent = false;
+
+  const logout = () => {
+    if (logoutSent || location.protocol === "file:") return;
+    logoutSent = true;
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/logout");
+      return;
+    }
+
+    fetch("/logout", {
+      method: "POST",
+      cache: "no-store",
+      keepalive: true,
+    }).catch(() => {});
+  };
+
+  window.addEventListener("pagehide", logout);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted && location.protocol !== "file:") {
+      location.replace("/login");
+    }
+  });
+}
+
 function loadState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -346,5 +373,6 @@ el.printQuote.addEventListener("click", () => {
 el.resetForm.addEventListener("click", resetForm);
 
 setupCasualDevToolsBlock();
+setupAutoLogoutOnLeave();
 hydrateForm();
 render();
