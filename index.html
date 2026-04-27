@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&#8203;</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="editor-panel" aria-label="Formulario do orcamento">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow">Or&ccedil;amento</p>
+            <h1>Gerador de PDF</h1>
+          </div>
+          <div class="toolbar-actions">
+            <button class="secondary-button" type="button" id="resetForm">Limpar</button>
+            <button class="primary-button" type="button" id="printQuote">Imprimir</button>
+          </div>
+        </div>
+
+        <form id="quoteForm" autocomplete="off">
+          <fieldset>
+            <legend>Cliente</legend>
+            <div class="field-grid">
+              <label>
+                Cliente
+                <input id="clientName" name="clientName" type="text">
+              </label>
+              <label>
+                Endere&ccedil;o
+                <input id="clientAddress" name="clientAddress" type="text">
+              </label>
+              <label>
+                Telefone do cliente
+                <input id="clientPhone" name="clientPhone" type="text">
+              </label>
+              <label>
+                Data
+                <input id="quoteDate" name="quoteDate" type="date">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <div class="section-title-row">
+              <legend>Produtos</legend>
+              <button class="inline-button" type="button" id="addProduct">+ Produto</button>
+            </div>
+            <div class="table-editor" id="productsEditor"></div>
+          </fieldset>
+
+          <fieldset>
+            <div class="section-title-row">
+              <legend>Detalhes extras</legend>
+              <button class="inline-button" type="button" id="addDetail">+ Detalhe</button>
+            </div>
+            <p class="field-hint">Use esta parte para WC1, WC2, suite, sacada ou qualquer local de instala&ccedil;&atilde;o.</p>
+            <div class="table-editor" id="detailsEditor"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>OBS e condi&ccedil;&otilde;es</legend>
+            <div class="field-grid">
+              <label class="wide">
+                OBS opcional
+                <textarea id="notes" name="notes" rows="3" placeholder="Aparece no orcamento apenas se estiver preenchido."></textarea>
+              </label>
+              <label>
+                Condi&ccedil;&atilde;o de pagamento
+                <input id="paymentTerms" name="paymentTerms" type="text">
+              </label>
+              <label>
+                Prazo de entrega
+                <input id="deliveryTerm" name="deliveryTerm" type="text">
+              </label>
+              <label>
+                Validade
+                <input id="validity" name="validity" type="text">
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-label="Previa do orcamento">
+        <article class="pdf-page page-one" id="quotePage">
+          <div class="pdf-rect header-left"></div>
+          <div class="pdf-rect header-right"></div>
+          <img class="original-logo" src="assets/logo-original.svg" alt="VitrarQ">
+          <div class="pdf-text quote-title">OR&Ccedil;AMENTO</div>
+
+          <div class="pdf-rect client-label-one"></div>
+          <div class="pdf-rect client-value-one"></div>
+          <div class="pdf-rect client-label-two"></div>
+          <div class="pdf-rect client-address-cell"></div>
+          <div class="pdf-rect client-phone-cell"></div>
+          <div class="pdf-text field-label client-label-text">CLIENTE</div>
+          <div class="pdf-text field-label address-label-text">ENDERE&Ccedil;O</div>
+          <div class="pdf-text field-value" id="previewClient"></div>
+          <div class="pdf-text field-value" id="previewAddress"></div>
+          <div class="pdf-text field-value" id="previewClientPhone"></div>
+
+          <div class="pdf-text materials-title">DESCRI&Ccedil;&Atilde;O DOS MATERIAIS (L x H)</div>
+          <div class="pdf-rect products-box" id="productsBox"></div>
+          <div id="previewProducts" class="pdf-layer"></div>
+          <div id="previewDetails" class="pdf-layer"></div>
+          <div id="notesSection" class="pdf-layer"></div>
+          <div class="pdf-text total-line is-hidden" id="totalLine">TOTAL: <span id="previewGrandTotal"></span></div>
+
+          <div class="pdf-text conditions-title" id="conditionsTitle">Condi&ccedil;&otilde;es Comerciais:</div>
+          <div class="pdf-text condition-line payment-line" id="paymentLine">Condi&ccedil;&atilde;o de pagamento: <span id="previewPayment"></span></div>
+          <div class="pdf-text condition-line delivery-line" id="deliveryLine">Prazo de entrega: <span id="previewDelivery"></span></div>
+          <div class="pdf-text condition-line validity-line" id="validityLine">Or&ccedil;amento v&aacute;lido por <span id="previewValidity"></span></div>
+          <div class="pdf-text date-line" id="dateLine"><span id="previewCity"></span>, <span id="previewDate"></span></div>
+          <div class="pdf-text seller-line" id="previewSeller"></div>
+          <div class="pdf-text phone-line" id="previewPhone"></div>
+        </article>
+
+        <article class="pdf-page page-two">
+          <div class="pdf-text company-line company-name">F. Berg Machado e Cia Ltda. ME.</div>
+          <div class="pdf-text company-line company-address">Av. Nassim Jabur. 615</div>
+          <div class="pdf-text company-line company-city">Londrina - PR</div>
+          <div class="pdf-text company-line company-phone">Fone: (43) 3334-0850</div>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
