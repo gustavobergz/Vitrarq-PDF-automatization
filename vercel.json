@@ -1,12 +1,7 @@
 {
   "functions": {
     "api/app.js": {
-      "includeFiles": [
-        "index.html",
-        "styles.css",
-        "script.js",
-        "assets/**"
-      ]
+      "includeFiles": "**/*"
     }
   },
   "routes": [
