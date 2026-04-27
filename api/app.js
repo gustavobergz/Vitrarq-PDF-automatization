@@ -14,6 +14,13 @@ const MIME_TYPES = {
 
 const PUBLIC_ROOT = path.resolve(__dirname, "..");
 
+function preventCache(res) {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.setHeader("Surrogate-Control", "no-store");
+}
+
 function sha256(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
@@ -41,12 +48,14 @@ function isAuthed(req) {
 }
 
 function redirect(res, location) {
+  preventCache(res);
   res.statusCode = 302;
   res.setHeader("Location", location);
   res.end();
 }
 
 function send(res, statusCode, body, contentType = "text/html; charset=utf-8") {
+  preventCache(res);
   res.statusCode = statusCode;
   res.setHeader("Content-Type", contentType);
   res.end(body);
@@ -193,16 +202,21 @@ module.exports = async function handler(req, res) {
 
     res.setHeader(
       "Set-Cookie",
-      `vitrarq_auth=${authToken()}; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=28800`
+      `vitrarq_auth=${authToken()}; HttpOnly; SameSite=Lax; Secure; Path=/`
     );
     return redirect(res, "/");
   }
 
   if (url.pathname === "/logout") {
+    preventCache(res);
     res.setHeader(
       "Set-Cookie",
       "vitrarq_auth=; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=0"
     );
+    if (req.method === "POST") {
+      res.statusCode = 204;
+      return res.end();
+    }
     return redirect(res, "/login");
   }
 
@@ -217,6 +231,7 @@ module.exports = async function handler(req, res) {
 
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || "application/octet-stream";
+  preventCache(res);
   res.statusCode = 200;
   res.setHeader("Content-Type", contentType);
   fs.createReadStream(filePath).pipe(res);
