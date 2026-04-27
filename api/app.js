@@ -12,6 +12,8 @@ const MIME_TYPES = {
   ".svg": "image/svg+xml",
 };
 
+const PUBLIC_ROOT = path.resolve(__dirname, "..");
+
 function sha256(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
@@ -162,10 +164,9 @@ function safeFilePath(urlPath) {
 
   if (!allowed) return null;
 
-  const filePath = path.join(process.cwd(), relativePath);
-  const root = process.cwd();
+  const filePath = path.resolve(PUBLIC_ROOT, relativePath);
 
-  if (!filePath.startsWith(root)) return null;
+  if (!filePath.startsWith(PUBLIC_ROOT)) return null;
   return filePath;
 }
 
