@@ -1,12 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 397 333" role="img" aria-label="VitrarQ">
-  <rect width="397" height="333" fill="none"/>
-  <g transform="translate(18 60) rotate(14 160 95)">
-    <path d="M20 40 Q30 0 76 8 L285 45 L236 206 L0 150 Z" fill="#66aee9"/>
-    <path d="M157 25 L285 45 L236 206 L122 178 Z" fill="#4d99d8" opacity=".62"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="VitrarQ">
+  <rect width="560" height="360" fill="none"/>
+  <g transform="translate(278 180) rotate(14) translate(-278 -180)">
+    <path
+      d="M286 74 Q307 48 340 68 L506 170 Q531 185 522 214 L488 321 Q480 348 450 345 L220 316 Z"
+      fill="#f2c200"/>
+    <path
+      d="M264 133 L506 170 Q531 185 522 214 L488 321 Q480 348 450 345 L220 316 Z"
+      fill="#e0b400" opacity=".72"/>
   </g>
-  <g transform="translate(181 65) rotate(14 120 115)">
-    <path d="M50 0 Q70 -10 95 15 L220 95 L175 250 Q168 278 138 274 L0 222 L44 82 Z" fill="#f2c200"/>
-    <path d="M44 82 L176 112 L138 274 L0 222 Z" fill="#e7b700" opacity=".8"/>
+  <g transform="translate(262 173) rotate(14) translate(-262 -173)">
+    <path
+      d="M54 203 L156 54 Q172 31 204 38 L448 98 L330 300 Z"
+      fill="#68afea"/>
+    <path
+      d="M298 69 L448 98 L330 300 L221 270 Z"
+      fill="#4e98d7" opacity=".58"/>
   </g>
-  <text x="70" y="195" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="500" letter-spacing="2">VITRARQ</text>
+  <text
+    x="120"
+    y="224"
+    fill="#fff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="76"
+    font-weight="400"
+    letter-spacing="4">VITRARQ</text>
 </svg>
